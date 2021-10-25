@@ -1,0 +1,13 @@
+This is an unofficially made repository for compatible versions of Chai benchmarks [1] for gem5-gpu [2] simulator.
+
+For all of this to work, first clone your gem5-gpu. Clone this repo inside of the base directory of your gem5-gpu (where the three folders of gem5, gem5-gpu and gpgpusim_distribution are) and name it benchmarks. Inside of this folder there are three folders, libcuda, which youll build once you have entered your docker container, common which contains common building tools, and chai which contains the actual benchmark. Inside each benchmark forlde, e.g., BS, there is a make file withing which there exists a variable called GEM5GPU. You have to assign this to the root of your gem5-gpu simulator. Then we have the docker container which should be placed in the root directory of your simulator. To enter the docker image use the below command:
+
+docker run -v `pwd`:/gem5-gpu -it powerjg/gem5-cuda-build /bin/bash
+
+After running this command, the folder which you ran this command in (hopefully the root of your simulator) wil be placed in the / directory of the image named as "gem5-gpu". You will enter libcuda and build that first and then you can build your benchmarks as early as you set the value of your simulator's root inside each benchmarks Makefile.
+
+Thanks!
+
+[1] J. Gómez-Luna, I. El Hajj, L.-W. Chang, V. Garcia-Flores, S. Garcia de Gonzalo, T. Jablin, A. J. Peña, W.-M. Hwu. Chai: Collaborative Heterogeneous Applications for Integrated-architectures. In Proceedings of IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS), 2017.
+
+[2] Power, Jason, Joel Hestness, Marc S. Orr, Mark D. Hill and David A. Wood. “gem5-gpu: A Heterogeneous CPU-GPU Simulator.” IEEE Computer Architecture Letters 14 (2015): 34-36.
